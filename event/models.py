@@ -1,4 +1,5 @@
 from django.db import models
+from users.forms import User
 
 # Create your models here.
 
@@ -11,5 +12,9 @@ class Event(models.Model):
     seats = models.IntegerField()
     # 
     location = models.TextField()
+    users = models.ManyToManyField(
+        User, related_name="events"
+    )
+
 
 
