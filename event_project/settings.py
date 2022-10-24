@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "event",
     "users",
     "crispy_forms",
+    "shared",
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
