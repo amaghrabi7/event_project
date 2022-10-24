@@ -1,5 +1,7 @@
 from django.db import models
 from users.forms import User
+from django.conf import settings
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
@@ -15,6 +17,9 @@ class Event(models.Model):
     users = models.ManyToManyField(
         User, related_name="events"
     )
+
+    created_by= models.ForeignKey(settings.AUTH_USER_MODEL)
+
 
 
 

@@ -38,13 +38,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "event",
-    "users",
     "crispy_forms",
     "shared",
+    "users",
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
-
+AUTH_USER_MODEL = "users.User"
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
