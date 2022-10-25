@@ -26,6 +26,7 @@ urlpatterns = [
      path("logout/", user_views.logout_user, name="logout"),
      path("login/", user_views.login_user, name="login"),
      path("home/", shared_views.home, name="home"),
+     path("profile/<int:user_id>/", shared_views.get_profile, name="profile"),
 ]
 
 if settings.DEBUG:

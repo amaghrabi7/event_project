@@ -1,8 +1,10 @@
 from django.db import models
-from users.forms import User
-from django.conf import settings
-from django.contrib.auth.models import AbstractUser
 
+from django.conf import settings
+
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 # Create your models here.
 
 class Event(models.Model):
@@ -11,14 +13,17 @@ class Event(models.Model):
     description = models.TextField()
     # event date has to be in future. go over later
     event_date = models.DateTimeField()
-    seats = models.IntegerField()
+    seats = models.PositiveIntegerField()
     # 
     location = models.TextField()
-    users = models.ManyToManyField(
-        User, related_name="events"
-    )
+    
+    participants = models.ManyToManyField(User, blank=True, related_name='events')
 
-    created_by= models.ForeignKey(settings.AUTH_USER_MODEL)
+    
+    # organizer= models.ForeignKey(User,on_delete=models.CASCADE, related_name="org_events")
+
+    def __str__(self):
+        return self.name
 
 
 
