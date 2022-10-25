@@ -27,6 +27,10 @@
           <a href="{% url 'register' %}" class="w3-bar-item w3-button"
             >Register</a
           >
+          {% endif %} {% if request.user.is_staff %}
+          <a href="{% url 'create_event' %}" class="w3-bar-item w3-button"
+            >Create Event</a
+          >
           {% endif %}
         </div>
       </div>

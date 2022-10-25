@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path
 from users import views as user_views
 from shared import views as shared_views
+from event import views as event_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -27,6 +28,8 @@ urlpatterns = [
      path("login/", user_views.login_user, name="login"),
      path("home/", shared_views.home, name="home"),
      path("profile/<int:user_id>/", shared_views.get_profile, name="profile"),
+     path("profile/edit/<int:user_id>/", shared_views.update_profile, name="edit_profile"),
+     path("add/", event_views.create_event, name="create_event" )
 ]
 
 if settings.DEBUG:

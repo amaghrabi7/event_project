@@ -17,7 +17,7 @@ crossorigin="anonymous"
             <h5 class="card-title">First name: {{ user.first_name }}</h3>
               <h6 class="card-text">Last name: {{user.last_name}}</h6>
               <h6 class="card-text">Email:{{user.email}}</p> 
-                <button type="submit">Edit</button>
+                <button type="submit"><a href="{% url 'edit_profile' user_id=user.id %}">Edit</a></button>
             </div>
           </div>
       </div>

@@ -17,10 +17,10 @@ class Event(models.Model):
     # 
     location = models.TextField()
     
-    participants = models.ManyToManyField(User, blank=True, related_name='events')
+    participants = models.ManyToManyField(User, related_name="events")
 
     
-    # organizer= models.ForeignKey(User,on_delete=models.CASCADE, related_name="org_events")
+    organizer= models.ForeignKey(User,on_delete=models.CASCADE, related_name="org_events")
 
     def __str__(self):
         return self.name
