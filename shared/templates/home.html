@@ -10,7 +10,7 @@ crossorigin="anonymous"
     <div class="row g-3 ">
       {% if event_items %} {% for item in event_items %}
       <div class="col-lg-4">
-        <div class="card">
+        <div class="card shadow p-3 mb-5 bg-white rounded">
           <div class="card-body">
             <img 
             src="{{item.image.url}}"
