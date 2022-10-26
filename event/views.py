@@ -27,3 +27,7 @@ def create_event(request):
         "form": form,
     }
     return render(request, "create-event.html", context )
+
+def book_event(request,event_id):
+    event= Event.objects.get(event_id)
+    
