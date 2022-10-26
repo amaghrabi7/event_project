@@ -17,16 +17,19 @@ def home(request: HttpRequest) -> HttpResponse:
   
 def get_profile(request, user_id):
     user = User.objects.get(id=user_id)
+    event_items: list[models.Event] = list(models.Event.objects.all())
     context= {
        "user":{
         "id": user.id,
         "first_name": user.first_name,
         "last_name":user.last_name,
-        "email":user.email,
+        "email":user.email,},
+
+        "event_items": event_items,
 
        }
 
-    }
+    
     return render(request, "profile.html", context)
 
 
