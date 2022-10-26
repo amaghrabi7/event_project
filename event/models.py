@@ -19,12 +19,7 @@ class Event(models.Model):
     end_time = models.TimeField(default='20:00')
     seats = models.PositiveIntegerField()
     book_seats = models.PositiveIntegerField(default=0)
-    # 
     location = models.TextField()
-    
-    participants = models.ManyToManyField(User, blank=True, related_name='events')
-
-    
     organizer= models.ForeignKey(User,on_delete=models.CASCADE, related_name="org_events")
 
     def __str__(self):
@@ -38,8 +33,11 @@ class Event(models.Model):
         else:
             return False
 
-    # @property
-    # def booked_seats(self):
+
+    @property
+    def available_tickets(self):
+        if self.bookings.all().count() < self.seats:
+            return True
         
 
 
@@ -51,4 +49,14 @@ class Event(models.Model):
     #     obj.save()
 
 
+class Booking(models.Model):
+    quantity = models.PositiveIntegerField()
+    event = models.ForeignKey(
+        Event, on_delete=models.CASCADE,
+        related_name="bookings"
+    )
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE,
+        related_name="bookings"
+    )
 

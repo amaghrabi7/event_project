@@ -1,6 +1,6 @@
 from cProfile import label
 from django import forms
-from .models import Event
+from .models import Event, Booking
 
 class EventForm(forms.ModelForm):
     class Meta:
@@ -40,8 +40,9 @@ class EventForm(forms.ModelForm):
 #     exclude = ('organizer',)
 
 # This is still a work in progress. Might be changed completely and/or removed.
-class EventBookForm(forms.ModelForm):
+
+
+class BookingForm(forms.ModelForm):
     class Meta:
-        model = Event
-        fields = "__all__"
-        exclude = ["name", "image", "description", "event_date","start_time","end_time", "seats", "location", "participants", "organizer"]
+        model = Booking
+        fields = ["quantity"]

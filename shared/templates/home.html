@@ -28,7 +28,11 @@ crossorigin="anonymous"
               <p class="card-text">Organizer: <a href="">{{event.organizer}}</a></p>
               <p class="card-text">Number of seats: {{event.seats}}</p>
               <p class="card-text">Number of booked seats: </p>
+              {% if event.available_tickets %}
               <a href="{% url 'book_event' event_id=event.id %}">Book!</a>
+              {% else %}
+              <button>Event Full</button>
+              {% endif %}
             </div>
           </div>
       </div>
