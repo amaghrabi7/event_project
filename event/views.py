@@ -35,11 +35,14 @@ def book_event(request, event_id):
             booking.event = event
             booking.save()
             messages.success(request, 'Booking made successfully!')
-            return redirect("home")
+            return redirect("booking_success")
     context = {
         "event": event,
         "form": form,
     }
     return render(request, "book-event.html", context)
+
+def booking_success(request):
+    return render(request, "booking-success.html")
 
     

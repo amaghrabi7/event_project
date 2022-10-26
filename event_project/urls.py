@@ -31,6 +31,7 @@ urlpatterns = [
      path("profile/edit/<int:user_id>/", user_views.update_profile, name="edit_profile"),
      path("add/", event_views.create_event, name="create_event" ),
      path("book/<int:event_id>/", event_views.book_event, name="book_event"),
+     path("success/", event_views.booking_success, name="booking_success"),
 ]
 
 if settings.DEBUG:
