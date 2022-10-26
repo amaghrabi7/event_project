@@ -8,29 +8,34 @@ crossorigin="anonymous"
 <div class="container  overflow-hidden">
     <h1 class="text-center">Events</h1>
     <div class="row g-3 ">
-      {% if event_items %} {% for item in event_items %}
-      
+      {% if event_items %} 
+      {% for event in event_items %}
+      {% if event.is_future %}
+
       <div class="col-lg-4">
         <div class="card shadow p-3 mb-5 bg-white rounded">
           <div class="card-body">
             <img 
-            src="{{item.image.url}}"
+            src="{{event.image.url}}"
             class="card-img-top"
-            alt={{item.name}} 
+            alt={{event.name}} 
             />
-            <h5 class="card-title">{{ item.name }}</h3>
-              <h6 class="card-subtitle mb-2 text-muted">Date: {{ item.event_date }}</h6>
-              <p class="card-text">Description:{{ item.description }}</p>
-              <p class="card-text">Starting Time:{{ item.start_time }}</p> 
-              <p class="card-text">Ending Time:{{ item.end_time }}</p>
-              <p class="card-text">Organiser: {{item.organizer}}</p>
-              <p class="card-text">Number of seats: {{item.seats}}</p>
+            <h5 class="card-title">{{ event.name }}</h3>
+              <h6 class="card-subtitle mb-2 text-muted">Date: {{ event.event_date }}</h6>
+              <p class="card-text">Description:{{ event.description }}</p>
+              <p class="card-text">Starting Time:{{ event.start_time }}</p> 
+              <p class="card-text">Ending Time:{{ event.end_time }}</p>
+              <p class="card-text">Organiser: {{event.organizer}}</p>
+              <p class="card-text">Number of seats: {{event.seats}}</p>
               <p class="card-text">Number of booked seats: </p>
+              <a href="{% url 'book_event' event_id=event.id %}">Book!</a>
             </div>
           </div>
       </div>
-      {% endfor %} {% else %}
-      <p>No store items yet!</p>
+      {% endif %}
+      {% endfor %} 
+      {% else %}
+      <p>No events yet!</p>
       {% endif %}
     </div>
   </div>

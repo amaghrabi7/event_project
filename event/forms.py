@@ -38,3 +38,10 @@ class EventForm(forms.ModelForm):
 # class Meta:
 #     model = Event
 #     exclude = ('organizer',)
+
+# This is still a work in progress. Might be changed completely and/or removed.
+class EventBookForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = "__all__"
+        exclude = ["name", "image", "description", "event_date","start_time","end_time", "seats", "location", "participants", "organizer"]

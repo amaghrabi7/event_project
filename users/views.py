@@ -1,10 +1,10 @@
 from django.shortcuts import render
-
-# Create your views here.
 from django.shortcuts import render, redirect
-from users.forms import UserRegister, LoginForm
+from users.forms import UserRegister, LoginForm, ProfileUpdate
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 
 # Create your views here.
 
@@ -50,3 +50,17 @@ def login_user(request):
     }
     return render(request, "login.html", context)
 
+
+def update_profile(request, user_id):
+    user = User.objects.get(id=user_id)
+    form = ProfileUpdate(instance=user)
+    if request.method == "POST":
+        form = ProfileUpdate(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect("profile", user_id)
+    context = {
+        "user": user,
+        "form": form,
+    }
+    return render(request, "update-profile.html", context)

@@ -28,8 +28,9 @@ urlpatterns = [
      path("login/", user_views.login_user, name="login"),
      path("home/", shared_views.home, name="home"),
      path("profile/<int:user_id>/", shared_views.get_profile, name="profile"),
-     path("profile/edit/<int:user_id>/", shared_views.update_profile, name="edit_profile"),
-     path("add/", event_views.create_event, name="create_event" )
+     path("profile/edit/<int:user_id>/", user_views.update_profile, name="edit_profile"),
+     path("add/", event_views.create_event, name="create_event" ),
+     path("book/<int:event_id>/", event_views.book_event, name="book_event"),
 ]
 
 if settings.DEBUG:

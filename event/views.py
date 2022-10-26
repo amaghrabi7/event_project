@@ -2,32 +2,36 @@ from django.shortcuts import render, redirect
 from event.forms import EventForm
 from .models import Event
 from django.contrib.auth import get_user_model
-
+from .forms import EventBookForm
 
 User = get_user_model()
 
-
 # Create your views here.
-
 
 def create_event(request):
     form = EventForm()
     if request.method == "POST":
-        form = EventForm(request.POST)
+        form = EventForm(request.POST, request.FILES)
         if form.is_valid():
-            # form["organizer"] =request.POST.get("username")
-            # form["organizer"] = User.objects.get(pk=request.user.id)
-            #  profile = form.save(commit=False)
-            #  profile.user = request.user
-            #  profile.save()
-            # form.instance.orgnizer = request.user
-            form.save()
+            event = form.save(commit=False)
+            event.organizer = request.user
+            event.save()
             return redirect("home")
     context = {
         "form": form,
     }
     return render(request, "create-event.html", context )
 
-def book_event(request,event_id):
-    event= Event.objects.get(event_id)
+
+def book_event(request, event_id):
+    event= Event.objects.get(id=event_id)
+    form = EventBookForm(instance=event)
+    if request.method == "POST":
+        form = EventBookForm(request.POST, instance=event)
+    context = {
+        "event": event,
+        "form": form,
+    }
+    return render(request, "book-event.html", context)
+
     
