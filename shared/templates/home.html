@@ -25,7 +25,7 @@ crossorigin="anonymous"
               <p class="card-text">Description:{{ event.description }}</p>
               <p class="card-text">Starting Time:{{ event.start_time }}</p> 
               <p class="card-text">Ending Time:{{ event.end_time }}</p>
-              <p class="card-text">Organiser: {{event.organizer}}</p>
+              <p class="card-text">Organizer: <a href="">{{event.organizer}}</a></p>
               <p class="card-text">Number of seats: {{event.seats}}</p>
               <p class="card-text">Number of booked seats: </p>
               <a href="{% url 'book_event' event_id=event.id %}">Book!</a>
