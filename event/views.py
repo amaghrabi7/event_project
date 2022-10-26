@@ -3,6 +3,7 @@ from event.forms import EventForm
 from .models import Event
 from django.contrib.auth import get_user_model
 from .forms import BookingForm
+from django.contrib import messages
 
 User = get_user_model()
 
@@ -33,6 +34,7 @@ def book_event(request, event_id):
             booking.user = request.user
             booking.event = event
             booking.save()
+            messages.success(request, 'Booking made successfully!')
             return redirect("home")
     context = {
         "event": event,

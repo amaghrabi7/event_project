@@ -35,10 +35,30 @@ class Event(models.Model):
 
 
     @property
-    def available_tickets(self):
-        if self.bookings.all().count() < self.seats:
-            return True
+    def booked_seats(self):
+        bookings = self.bookings.all()
+        _bookings = []
+        for booking in bookings:
+           _bookings.append(booking.quantity)
+        q = 0
+        for quantinty in _bookings:
+            q = q + quantinty
+        return self.seats - q
+
+    @property
+    def event_status(self): 
+        bookings = self.bookings.all()
+        _bookings = []
+        for booking in bookings:
+           _bookings.append(booking.quantity)
+        q = 0
+        for quantinty in _bookings:
+            q = q + quantinty
         
+        if q < self.seats:
+            return True
+        else:
+            return False
 
 
 
