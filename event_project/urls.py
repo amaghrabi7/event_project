@@ -26,10 +26,10 @@ urlpatterns = [
     path("register/", user_views.user_register, name="register"),
      path("logout/", user_views.logout_user, name="logout"),
      path("login/", user_views.login_user, name="login"),
-     path("home/", shared_views.home, name="home"),
-     path("profile/<int:user_id>/", shared_views.get_profile, name="profile"),
+     path("home/", event_views.home, name="home"),
+     path("profile/<int:user_id>/", user_views.get_profile, name="profile"),
      path("profile/edit/<int:user_id>/", user_views.update_profile, name="edit_profile"),
-     path("add/", event_views.create_event, name="create_event" ),
+     path("event/add/", event_views.create_event, name="create_event" ),
      path("book/<int:event_id>/", event_views.book_event, name="book_event"),
      path("success/", event_views.booking_success, name="booking_success"),
 ]

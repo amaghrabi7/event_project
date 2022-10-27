@@ -1,3 +1,4 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from event.forms import EventForm
 from .models import Event
@@ -10,6 +11,15 @@ from django.contrib.admin.views.decorators import staff_member_required
 User = get_user_model()
 
 # Create your views here.
+
+def home(request: HttpRequest) -> HttpResponse:
+    event_items: list[Event] = list(Event.objects.all())
+    context = {
+        "event_items": event_items,
+    }
+    return render(request, "home.html", context)
+
+
 @staff_member_required()
 def create_event(request):
     form = EventForm()
@@ -24,6 +34,7 @@ def create_event(request):
         "form": form,
     }
     return render(request, "create-event.html", context )
+
 
 @login_required
 def book_event(request, event_id):

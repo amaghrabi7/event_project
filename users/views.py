@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from users.forms import UserRegister, LoginForm, ProfileUpdate
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth import get_user_model
+from event.models import Event
+from django.contrib.auth.decorators import login_required
 
 User = get_user_model()
 
@@ -25,6 +27,7 @@ def user_register(request):
     }
 
     return render(request, "register.html", context)
+
 
 def logout_user(request):
     logout(request)
@@ -49,6 +52,27 @@ def login_user(request):
         "form": form,
     }
     return render(request, "login.html", context)
+
+
+@login_required 
+def get_profile(request, user_id):
+    user = User.objects.get(id=user_id)
+    event_items: list[Event] = list(Event.objects.all())
+    
+    context= {
+       "user":{
+        "id": user.id,
+        "first_name": user.first_name,
+        "last_name":user.last_name,
+        "email":user.email,},
+
+        "event_items": event_items,
+        
+
+       }
+
+    
+    return render(request, "profile.html", context)
 
 
 def update_profile(request, user_id):
