@@ -18,7 +18,7 @@ class Event(models.Model):
     start_time = models.TimeField(default='20:00')
     end_time = models.TimeField(default='20:00')
     seats = models.PositiveIntegerField()
-    book_seats = models.PositiveIntegerField(default=0)
+    
     location = models.TextField()
     organizer= models.ForeignKey(User,on_delete=models.CASCADE, related_name="org_events")
 
@@ -59,14 +59,6 @@ class Event(models.Model):
             return True
         else:
             return False
-
-
-
-    # def created_updated(model, request):
-    #     obj = model.objects.latest('pk')
-    #     if obj.created_by is None:
-    #         obj.created_by = request.user
-    #     obj.save()
 
 
 class Booking(models.Model):

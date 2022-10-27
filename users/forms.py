@@ -19,7 +19,7 @@ class LoginForm(forms.Form):
 class ProfileUpdate(forms.ModelForm):
     class Meta:
         model = User
-        fields = ["username", "first_name", "last_name", "email", "password"]
-        exclude = ["username", "password"]
+        fields = ["username", "first_name", "last_name", "email",]
+        
 
     

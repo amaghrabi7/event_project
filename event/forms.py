@@ -24,24 +24,6 @@ class EventForm(forms.ModelForm):
             
         }
 
-# def __init__(self, *args, **kwargs):
-#     self.request = kwargs.pop('request', None)
-#     return super(EventForm, self).__init__(*args, **kwargs)
-
-# def save(self, *args, **kwargs):
-
-#     obj = super(EventForm, self).save(commit=False)
-#     if self.request:
-#         obj.organizer = self.request.user
-#     obj.save()
-
-# class Meta:
-#     model = Event
-#     exclude = ('organizer',)
-
-# This is still a work in progress. Might be changed completely and/or removed.
-
-
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
