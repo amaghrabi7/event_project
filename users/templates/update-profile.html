@@ -2,6 +2,6 @@
 <form action="{% url 'edit_profile' user_id=user.id %}" method="POST">
   {% csrf_token %}{{form | crispy}}
   <button type="submit">Update</button>
-  <a href="{% url 'profile' user_id=user.id %}">Cancel</a>
+  <a href="{% url 'profile_user' user_id=user.id %}">Cancel</a>
 </form>
 {% endblock content %}

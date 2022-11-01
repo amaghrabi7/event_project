@@ -7,11 +7,29 @@ crossorigin="anonymous"
 />
 
 <div class="container  overflow-hidden">
-    <h1 class="text-center">Events</h1>
+    <h1 class="text-center">My Profile</h1>
     <div class="row g-3 ">
-      {% if event_items %} 
-      {% for event in event_items %}
-      {% if event.is_future %}
+      
+      <div class="col-lg-4">
+        <div class="card shadow p-3 mb-5 bg-white rounded">
+          <div class="card ">
+          <div class="card-body">
+           
+            <h5 class="card-title">First name: {{ user.first_name }}</h3>
+              <h6 class="card-text">Last name: {{user.last_name}}</h6>
+              <h6 class="card-text">Email:{{user.email}}</p> 
+                <button type="submit"><a href="{% url 'edit_profile' user_id=user.id %}">Edit</a></button>
+            </div>
+          </div>
+      </div>
+      
+    </div>
+  </div>
+  <div class="container  overflow-hidden">
+    <h1 class="text-center">My Events</h1>
+    <div class="row g-3 ">
+      {% if event_items %} {% for event in event_items %}
+       {%if event.organizer.id == user.id %}
       <div class="col-lg-4">
         <div class="card shadow p-3 mb-5 bg-white rounded">
           <div class="card-body">
@@ -25,21 +43,13 @@ crossorigin="anonymous"
               <p class="card-text">Description:{{ event.description }}</p>
               <p class="card-text">Starting Time:{{ event.start_time }}</p> 
               <p class="card-text">Ending Time:{{ event.end_time }}</p>
-              <p class="card-text">Organizer: <a href=" {% url 'profile_org' user_id=event.organizer.id %} ">{{event.organizer}}</a></p>
+              <p class="card-text">Organizer: {{event.organizer}}</p>
               <p class="card-text">Number of seats: {{event.seats}}</p>
-              <p class="card-text">Remaining seats: {{event.booked_seats}} </p>
-              {% if request.user.is_authenticated %}
-              {% if event.event_status %}
-              <a href="{% url 'book_event' event_id=event.id %}">Book!</a>
-              {% else %}
-              <button>Event Full</button>
-              {% endif %} {% endif %}
+             
             </div>
           </div>
-      </div>
-      {% endif %}
-      {% endfor %} 
-      {% else %}
+      </div>{% endif %}
+      {% endfor %} {% else %} 
       <p>No events yet!</p>
       {% endif %}
     </div>

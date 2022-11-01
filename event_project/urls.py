@@ -27,11 +27,12 @@ urlpatterns = [
      path("logout/", user_views.logout_user, name="logout"),
      path("login/", user_views.login_user, name="login"),
      path("home/", event_views.home, name="home"),
-     path("profile/<int:user_id>/", user_views.get_profile, name="profile"),
+     path("profile-org/<int:user_id>/", user_views.get_organizer_profile, name="profile_org"),
      path("profile/edit/<int:user_id>/", user_views.update_profile, name="edit_profile"),
      path("event/add/", event_views.create_event, name="create_event" ),
      path("book/<int:event_id>/", event_views.book_event, name="book_event"),
      path("success/", event_views.booking_success, name="booking_success"),
+      path("profile-user/<int:user_id>/", user_views.get_user_profile, name="profile_user"),
 ]
 
 if settings.DEBUG:

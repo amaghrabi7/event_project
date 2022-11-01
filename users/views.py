@@ -55,8 +55,9 @@ def login_user(request):
 
 
 @login_required 
-def get_profile(request, user_id):
+def get_user_profile(request, user_id):
     user = User.objects.get(id=user_id)
+    
     event_items: list[Event] = list(Event.objects.all())
     
     context= {
@@ -72,7 +73,28 @@ def get_profile(request, user_id):
        }
 
     
-    return render(request, "profile.html", context)
+    return render(request, "profile-user.html", context)
+
+def get_organizer_profile(request, user_id):
+    user = User.objects.get(id=user_id)
+    
+    event_items: list[Event] = list(Event.objects.all())
+    
+    context= {
+       "user":{
+        "id": user.id,
+        "first_name": user.first_name,
+        "last_name":user.last_name,
+        "email":user.email,},
+
+        "event_items": event_items,
+        
+
+       }
+
+    
+    return render(request, "profile-organizer.html", context)
+
 
 
 def update_profile(request, user_id):
@@ -82,9 +104,10 @@ def update_profile(request, user_id):
         form = ProfileUpdate(request.POST, instance=user)
         if form.is_valid():
             form.save()
-            return redirect("profile", user_id)
+            return redirect("profile_user", user_id)
     context = {
         "user": user,
         "form": form,
     }
     return render(request, "update-profile.html", context)
+
